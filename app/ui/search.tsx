@@ -2,21 +2,12 @@
 
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 import {usePathname, useRouter, useSearchParams} from 'next/navigation';
-
-function debounce(fn: Function, delay: number) {
-    let timerId: any
-    return function (...args:any[]) {
-        if(timerId) clearTimeout(timerId)
-        timerId = setTimeout(() => {
-            fn.apply(this, args);
-        }, delay);
-    }
-}
+import {debounce} from "@/app/lib/utils";
 
 export default function Search({ placeholder }: { placeholder: string }) {
     const searchParams = useSearchParams()
     const pathname = usePathname();
-    const { replace } = useRouter();
+    const { replace  } = useRouter();
 
     const handleSearch = debounce((term: string) => {
         console.log(`Searching... ${term}`);
